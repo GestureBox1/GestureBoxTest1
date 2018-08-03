@@ -19,7 +19,7 @@ export class HomeComponent {
   enableDrag: boolean;
   disableCursor: boolean;
   hideDates: boolean;
-  
+  isCaptureOn = true;
 
   CONTROLS = ['up', 'down', 'left', 'right'];
   mouseDown;
@@ -46,7 +46,6 @@ export class HomeComponent {
   ngOnInit() {
     this.webcamElement = document.getElementById('webcam');
     this.getData();
-    this.webCamInIt();
   }
   drawChart() {
 
@@ -65,57 +64,57 @@ export class HomeComponent {
       this.predict();
     });
   }
-  async  predict() {
+  async predict() {
     // ui.isPredicting();
     while (this.isPredicting) {
       const predictedClass = tf.tidy(() => {
         // Capture the frame from the webcam.
         const img = this.capture();
-  
+
         // Make a prediction through mobilenet, getting the internal activation of
         // the mobilenet model.
         const activation = this.mobilenet.predict(img);
-  
+
         // Make a prediction through our newly-trained model using the activation
         // from mobilenet as input.
         const predictions = this.model.predict(activation);
-  
+
         // Returns the index with the maximum probability. This number corresponds
         // to the class the model thinks is the most probable given the input.
         return predictions.as1D().argMax();
       });
-  
+
       const classId = (await predictedClass.data())[0];
       predictedClass.dispose();
       this.addBinding(classId);
       //ui.predictClass(classId);
-      await tf.nextFrame();
+        await tf.nextFrame();
     }
     // ui.donePredicting();
   }
-  addBinding(classId){
-    switch(classId) {
+  addBinding(classId) {
+    switch (classId) {
       case 0:
-      this.chart.rotateTo('up');
-          break;
+        this.chart.rotateTo('up');
+        break;
       case 1:
-      this.chart.rotateTo('down');
-          break;
+        this.chart.rotateTo('down');
+        break;
       case 2:
-      this.chart.rotateTo('left');
-          break;
+        this.chart.rotateTo('left');
+        break;
       case 3:
-      this.chart.rotateTo('right');
-          break;
+        this.chart.rotateTo('right');
+        break;
       default:
-          console.log("Do Nothing");
+        console.log("Do Nothing");
+    }
   }
-  }
-  async  train() {
+  async train() {
     if (this.controllerDataset.xs == null) {
       throw new Error('Add some examples before training!');
     }
-  
+
     // Creates a 2-layer fully connected model. By creating a separate model,
     // rather than adding layers to the mobilenet model, we "freeze" the weights
     // of the mobilenet model, and only train weights from the new model.
@@ -124,7 +123,7 @@ export class HomeComponent {
         // Flattens the input to a vector so we can use it in a dense layer. While
         // technically a layer, this only performs a reshape (and has no training
         // parameters).
-        tf.layers.flatten({inputShape: [7, 7, 256]}),
+        tf.layers.flatten({ inputShape: [7, 7, 256] }),
         // Layer 1
         tf.layers.dense({
           units: 100,
@@ -142,46 +141,54 @@ export class HomeComponent {
         })
       ]
     });
-  
+
     // Creates the optimizers which drives training of the model.
     const optimizer = tf.train.adam(0.00001);
     // We use categoricalCrossentropy which is the loss function we use for
     // categorical classification which measures the error between our predicted
     // probability distribution over classes (probability that an input is of each
     // class), versus the label (100% probability in the true class)>
-    this.model.compile({optimizer: optimizer, loss: 'categoricalCrossentropy'});
-  
+    this.model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy' });
+
     // We parameterize batch size as a fraction of the entire dataset because the
     // number of examples that are collected depends on how many examples the user
     // collects. This allows us to have a flexible batch size.
     const batchSize =
-        Math.floor(this.controllerDataset.xs.shape[0] * 0.05);
+      Math.floor(this.controllerDataset.xs.shape[0] * 0.05);
     if (!(batchSize > 0)) {
       throw new Error(
-          `Batch size is 0 or NaN. Please choose a non-zero fraction.`);
+        `Batch size is 0 or NaN. Please choose a non-zero fraction.`);
     }
-  
+
     // Train the model! Model.fit() will shuffle xs & ys so we don't have to.
     this.model.fit(this.controllerDataset.xs, this.controllerDataset.ys, {
       batchSize,
       epochs: 50,
       callbacks: {
         onBatchEnd: async (batch, logs) => {
-            console.log("Trained");
+          console.log("Trained");
           //ui.trainStatus('Loss: ' + logs.loss.toFixed(5));
-          await tf.nextFrame();
-         
+            await tf.nextFrame();
         }
       }
     });
-    
   }
 
-  async saveModel () {
+  startGestureRegistration() {
+    this.webcamElement = document.getElementById('webcam');
+    this.webCamInIt();
+    this.isPredicting = true;
+  }
+
+  stopGestureRegistration() {
+    this.isPredicting = false;
+  }
+
+  async saveModel() {
     const saveResult = await this.model.save('indexeddb://my-model-1');
   }
-  async ReadLo(){
-     this.model = await tf.loadModel('indexeddb://my-model-1');
+  async ReadLo() {
+    this.model = await tf.loadModel('indexeddb://my-model-1');
   }
 
   addEvents() {
@@ -191,17 +198,17 @@ export class HomeComponent {
     const downButton = document.getElementById('down');
     const leftButton = document.getElementById('left');
     const rightButton = document.getElementById('right');
-    upButton.addEventListener('mousedown', () => this.handler(0));
-    upButton.addEventListener('mouseup', () => this.mouseDown = false);
+    upButton.addEventListener('mousedown', () => this.handler(0), {passive: true});
+    upButton.addEventListener('mouseup', () => this.mouseDown = false, {passive: true});
 
-    downButton.addEventListener('mousedown', () => this.handler(1));
-    downButton.addEventListener('mouseup', () => this.mouseDown = false);
+    downButton.addEventListener('mousedown', () => this.handler(1), {passive: true});
+    downButton.addEventListener('mouseup', () => this.mouseDown = false, {passive: true});
 
-    leftButton.addEventListener('mousedown', () => this.handler(2));
-    leftButton.addEventListener('mouseup', () => this.mouseDown = false);
+    leftButton.addEventListener('mousedown', () => this.handler(2), {passive: true});
+    leftButton.addEventListener('mouseup', () => this.mouseDown = false, {passive: true});
 
-    rightButton.addEventListener('mousedown', () => this.handler(3));
-    rightButton.addEventListener('mouseup', () => this.mouseDown = false);
+    rightButton.addEventListener('mousedown', () => this.handler(3), {passive: true});
+    rightButton.addEventListener('mouseup', () => this.mouseDown = false, {passive: true});
 
   }
   async  handler(label) {
@@ -302,14 +309,14 @@ export class HomeComponent {
       }
     });
   }
-   adjustVideoSize(width, height, webcamElement) {
+  adjustVideoSize(width, height, webcamElement) {
     const aspectRatio = width / height;
     if (width >= height) {
-        webcamElement.width = aspectRatio * webcamElement.height;
+      webcamElement.width = aspectRatio * webcamElement.height;
     } else if (width < height) {
-        webcamElement.height = webcamElement.width / aspectRatio;
+      webcamElement.height = webcamElement.width / aspectRatio;
     }
-}
+  }
 
 }
 class ControllerDataset {

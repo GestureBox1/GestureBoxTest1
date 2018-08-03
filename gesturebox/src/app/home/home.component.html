@@ -35,79 +35,92 @@
                 </div>
                 <div class="kx-row kx-row--gutters-h kx-justify-content-center">
                     <div class="kx-m--base">
-                        <button id="train" class="kx-btn kx-btn--skin-primary kx-btn--size-large">
+                        <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" (click)="startGestureRegistration()">
                             <span class="kx-btn__inner">
-                                <span class="kx-btn__txt">Train</span>
+                                <span class="kx-btn__txt">Start</span>
                             </span>
                         </button>
-                        <button class="kx-btn kx-btn--skin-primary kx-btn--size-large kx-mx--base" id="predict">
+                        <button class="kx-btn kx-btn--skin-primary kx-btn--size-base kx-mx--base" (click)="stopGestureRegistration()">
                             <span class="kx-btn__inner">
-                                <span class="kx-btn__txt">Predict</span>
+                                <span class="kx-btn__txt">Stop</span>
                             </span>
                         </button>
                     </div>
-                </div>
-                <div class="kx-row kx-row--gutters-h kx-justify-content-center">
-                    <div class="kx-row kx-row--gutters">
+                    <div class="kx-row kx-row--gutters-h kx-justify-content-center">
                         <div class="kx-m--base">
-                            <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="up">
+                            <button id="train" class="kx-btn kx-btn--skin-primary kx-btn--size-base">
                                 <span class="kx-btn__inner">
-                                    <span class="kx-btn__txt">Up</span>
-                                    <i class="kx-icon kx-icon--size-base">
-                                        <svg focusable="false">
-                                            <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-up"></use>
-                                        </svg>
-                                    </i>
+                                    <span class="kx-btn__txt">Train</span>
                                 </span>
                             </button>
-                            <span class="kx-mx--base" id="up-total">0</span>
-                        </div>
-                        <div class="kx-m--base">
-                            <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="down">
+                            <button class="kx-btn kx-btn--skin-primary kx-btn--size-base kx-mx--base" id="predict">
                                 <span class="kx-btn__inner">
-                                    <span class="kx-btn__txt">Down</span>
-                                    <i class="kx-icon kx-icon--size-base">
-                                        <svg focusable="false">
-                                            <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-down"></use>
-                                        </svg>
-                                    </i>
+                                    <span class="kx-btn__txt">Predict</span>
                                 </span>
                             </button>
-                            <span class="kx-mx--base" id="down-total">0</span>
                         </div>
                     </div>
-                    <div class="kx-row kx-row--gutters kx-mt--base">
-                        <div class="kx-m--base">
-                            <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="left">
-                                <span class="kx-btn__inner">
-                                    <span class="kx-btn__txt">left</span>
-                                    <i class="kx-icon kx-icon--size-base">
-                                        <svg focusable="false">
-                                            <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-left"></use>
-                                        </svg>
-                                    </i>
-
-                                </span>
-                            </button>
-                            <span class="kx-mx--base" id="left-total">0</span>
+                    <div class="kx-row kx-row--gutters-h kx-justify-content-center">
+                        <div class="kx-row kx-row--gutters">
+                            <div class="kx-m--base">
+                                <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="up">
+                                    <span class="kx-btn__inner">
+                                        <span class="kx-btn__txt">Up</span>
+                                        <i class="kx-icon kx-icon--size-base">
+                                            <svg focusable="false">
+                                                <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-up"></use>
+                                            </svg>
+                                        </i>
+                                    </span>
+                                </button>
+                                <span class="kx-mx--base" id="up-total">0</span>
+                            </div>
+                            <div class="kx-m--base">
+                                <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="down">
+                                    <span class="kx-btn__inner">
+                                        <span class="kx-btn__txt">Down</span>
+                                        <i class="kx-icon kx-icon--size-base">
+                                            <svg focusable="false">
+                                                <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-down"></use>
+                                            </svg>
+                                        </i>
+                                    </span>
+                                </button>
+                                <span class="kx-mx--base" id="down-total">0</span>
+                            </div>
                         </div>
-                        <div class="kx-m--base">
-                            <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="right">
-                                <span class="kx-btn__inner">
-                                    <span class="kx-btn__txt">Right</span>
-                                    <i class="kx-icon kx-icon--size-base">
-                                        <svg focusable="false">
-                                            <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-right"></use>
-                                        </svg>
-                                    </i>
+                        <div class="kx-row kx-row--gutters kx-mt--base">
+                            <div class="kx-m--base">
+                                <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="left">
+                                    <span class="kx-btn__inner">
+                                        <span class="kx-btn__txt">left</span>
+                                        <i class="kx-icon kx-icon--size-base">
+                                            <svg focusable="false">
+                                                <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-left"></use>
+                                            </svg>
+                                        </i>
 
-                                </span>
-                            </button>
-                            <span class="kx-mx--base" id="right-total">0</span>
+                                    </span>
+                                </button>
+                                <span class="kx-mx--base" id="left-total">0</span>
+                            </div>
+                            <div class="kx-m--base">
+                                <button class="kx-btn kx-btn--skin-primary kx-btn--size-base" id="right">
+                                    <span class="kx-btn__inner">
+                                        <span class="kx-btn__txt">Right</span>
+                                        <i class="kx-icon kx-icon--size-base">
+                                            <svg focusable="false">
+                                                <use xlink:href="../../assets/img/icons/sprites/icons.svg#angle-right"></use>
+                                            </svg>
+                                        </i>
+
+                                    </span>
+                                </button>
+                                <span class="kx-mx--base" id="right-total">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
