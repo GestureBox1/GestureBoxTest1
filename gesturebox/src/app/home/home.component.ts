@@ -63,7 +63,8 @@ export class HomeComponent {
       this.predict();
     });
   }
-  async  predict() {
+  
+  async predict() {
     // ui.isPredicting();
     while (this.isPredicting) {
       const predictedClass = tf.tidy(() => {
