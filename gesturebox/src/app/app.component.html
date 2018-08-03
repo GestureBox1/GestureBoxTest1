@@ -1,0 +1,17 @@
+<div *ngIf="initializing" class="loading">
+  <i class="kx-icon kx-icon--size-xxxlarge kx-process" style="margin-top: 25px">
+      <svg class="kx-process__spinner" viewBox="0 0 50 50">
+          <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="6"></circle>
+      </svg>
+  </i>
+</div>
+
+<app-header *ngIf="!initializing" class="kx-page__header kx-flex"></app-header>
+<app-sidebar *ngIf="!initializing" class="kx-page__nav sidebar_scroll" 
+  [ngClass]="{'kx-is-hidden': sidebarsVisibilityService.navigationPanelHidden, 'kx-is-active': sidebarsVisibilityService.navigationPanelActive}">
+></app-sidebar>
+<app-main *ngIf="!initializing" class="kx-page__main">
+</app-main>
+<app-tools-menu *ngIf="!initializing" class="kx-page__nav kx-is-hidden kx-sidebar-right" 
+  [ngClass]="{'kx-is-hidden': sidebarsVisibilityService.toolsPanelHidden, 'kx-is-active': sidebarsVisibilityService.toolsPanelActive}">
+</app-tools-menu>

@@ -1,0 +1,9 @@
+<button class="kx-page__overlay" (click)="onPageOverlayClick($event)"
+    [ngClass]="{'kx-is-active': sidebarsVisibilityService.pageOverlayActive, 'kx-is-animating': sidebarsVisibilityService.pageOverlayAnimating}">
+    <span class="kx-is-vishidden">Close</span>
+</button>
+<div class="kx-page__content">
+    <router-outlet></router-outlet>
+</div>
+<app-message></app-message>
+<app-footer class="kx-page__footer kx-theme--navy"></app-footer>

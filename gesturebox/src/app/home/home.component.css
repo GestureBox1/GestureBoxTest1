@@ -1,0 +1,47 @@
+@media screen and  (max-width: 1199px){
+    .kx-col--4\@tab-s {
+        width: 25%;
+    }
+    .kx-row--gutters {
+        width: 100%;
+        margin: 0 auto;
+    }
+}   
+ 
+@media screen and (max-width: 767px){
+    .kx-col--6\@mob-s {
+        width: 45%;	   
+    } 
+    .kx-row--gutters {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .kx-row--gutters .kx-col {
+        margin: 0.5rem;
+    }
+}
+
+.favoriteitem{
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#homecomponent {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: calc(100% - 200px);
+}
+    
+.home-component-inner{
+    width: 104%;
+    height: 72vh;
+    overflow: auto;
+    overflow-x: hidden;
+    padding-right: .75rem;
+}
+  

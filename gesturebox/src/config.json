@@ -1,0 +1,36 @@
+{
+  "authenticationEndpoint": "http://localhost:8080/Security/auth",
+  "authenticationClientId": "gesturebox",
+  "baseApiUrl": "http://localhost:8080/",
+  "homeUrl": "http://localhost:4200/",
+  "userProfileUrl": "http://localhost:4201/",
+  "logging": {
+    "logLevel": 4,
+    "bufferingTime": 5000,
+    "endpoint": "bulkEntry"
+  },
+  "formatting": {
+    "dateFormat": "MMMM dd YYYY",
+    "timeFormat": "HH:mm:ss",
+    "formatDate": {
+      "format": "dd/MM/yyyy",
+      "long": "dddd, d MMMM yyyy",
+      "longForMoment": "dddd, D MMMM YYYY",
+      "short": "dd/MM/yyyy",
+      "shortForMoment": "DD/MM/YYYY"
+    },
+    "formatTime": {
+      "format": "HH:mm:ss",
+      "long": "HH:mm:ss",
+      "short": "HH:mm"
+    },
+    "formatNumber": {
+      "decimalSeparator": ".",
+      "groupSeparator": " ",
+      "decimalDigits": 2,
+      "decimalGorup": 3,
+      "leadingZeros": 1
+    },
+    "culture": "en"
+  }
+}

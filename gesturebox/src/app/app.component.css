@@ -1,0 +1,55 @@
+/* TODO: add right sidebar component to Design System */
+.kx-sidebar-right {
+    background-color: azure;
+    right: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+}
+.kx-sidebar-right.kx-is-active {
+    transform: scaleX(1);
+}
+
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+}
+
+.sidebar_scroll{
+    position: fixed;
+    bottom: 0;
+    z-index: 1030;
+    overflow-y: auto;
+    border-radius: 0;
+}
+
+@media screen and (min-width: 48.0625em){
+    .kx-page__main {
+        height: calc(100vh - 3.5rem);
+    }
+}
+
+@media screen and (max-width: 768px){
+    .kx-page__main {
+        height: calc(100vh - 3.5rem - 7rem);
+        min-height: 0% !important; 
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px){
+    .kx-page__main {
+        height: calc(100vh - 3.5rem - 7rem);
+    }
+}
+
+.kx-page__main {
+    width: 100%;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    transition: width .1s ease-in-out;
+    overflow: auto;
+}

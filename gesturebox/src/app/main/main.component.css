@@ -1,0 +1,3 @@
+.kx-page__content {
+    min-height: calc(100vh - 14.5em);
+}
